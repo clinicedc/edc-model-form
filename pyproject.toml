@@ -1,0 +1,20 @@
+[tool.black]
+line-length = 95
+target-version = ["py39"]
+
+[tool.isort]
+profile = "black"
+py_version = "39"
+
+[tool.coverage.run]
+parallel = true
+branch = true
+source = ["edc_model_form"]
+
+[tool.coverage.paths]
+source = ["edc_model_form", ".tox/*/site-packages"]
+
+[tool.coverage.report]
+show_missing = true
+skip_covered = true
+omit = ["requirements.txt"]
