@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 import logging
-import os
 import sys
 from os.path import abspath, dirname
 
@@ -16,7 +15,6 @@ DEFAULT_SETTINGS = DefaultTestSettings(
     APP_NAME="edc_model_form",
     BASE_DIR=base_dir,
     ALLOWED_HOSTS=["localhost"],
-    ROOT_URLCONF=f"{app_name}.tests.urls",
     STATIC_URL="/static/",
     INSTALLED_APPS=[
         "django.contrib.admin",
