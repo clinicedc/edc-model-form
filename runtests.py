@@ -1,21 +1,23 @@
 #!/usr/bin/env python
 import logging
 import sys
-from os.path import abspath, dirname
+from os.path import abspath, dirname, join
 
 import django
 from django.conf import settings
 from django.test.runner import DiscoverRunner
 from edc_test_utils import DefaultTestSettings
 
-app_name = "edc_model_form"
 base_dir = dirname(abspath(__file__))
+app_name = "edc_model_form"
 
 DEFAULT_SETTINGS = DefaultTestSettings(
-    APP_NAME="edc_model_form",
+    calling_file=__file__,
     BASE_DIR=base_dir,
-    ALLOWED_HOSTS=["localhost"],
-    STATIC_URL="/static/",
+    APP_NAME=app_name,
+    ETC_DIR=join(base_dir, app_name, "tests", "etc"),
+    EDC_AUTH_SKIP_SITE_AUTHS=True,
+    EDC_AUTH_SKIP_AUTH_UPDATER=True,
     INSTALLED_APPS=[
         "django.contrib.admin",
         "django.contrib.auth",
@@ -24,11 +26,19 @@ DEFAULT_SETTINGS = DefaultTestSettings(
         "django.contrib.messages",
         "django.contrib.staticfiles",
         "django.contrib.sites",
+        "django_crypto_fields.apps.AppConfig",
+        "django_revision.apps.AppConfig",
         "multisite",
+        "edc_appointment.apps.AppConfig",
+        "edc_auth.apps.AppConfig",
+        "edc_crf.apps.AppConfig",
         "edc_device.apps.AppConfig",
+        "edc_notification.apps.AppConfig",
+        "edc_registration.apps.AppConfig",
         "edc_sites.apps.AppConfig",
         "edc_model_form.apps.AppConfig",
     ],
+    add_dashboard_middleware=True,
 ).settings
 
 
@@ -37,7 +47,7 @@ def main():
         settings.configure(**DEFAULT_SETTINGS)
     django.setup()
     tags = [t.split("=")[1] for t in sys.argv if t.startswith("--tag")]
-    failures = DiscoverRunner(failfast=True, tags=tags).run_tests([f"{app_name}.tests"])
+    failures = DiscoverRunner(failfast=False, tags=tags).run_tests([f"{app_name}.tests"])
     sys.exit(failures)
 
 
