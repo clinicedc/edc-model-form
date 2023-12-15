@@ -8,8 +8,8 @@ Mixins for ModelForms
 .. |pypi| image:: https://img.shields.io/pypi/v/edc-model-form.svg
     :target: https://pypi.python.org/pypi/edc-model-form
 
-.. |actions| image:: https://github.com/clinicedc/edc-model-form/workflows/build/badge.svg?branch=develop
-  :target: https://github.com/clinicedc/edc-model-form/actions?query=workflow:build
+.. |actions| image:: https://github.com/clinicedc/edc-model-form/actions/workflows/build.yml/badge.svg
+  :target: https://github.com/clinicedc/edc-model-form/actions/workflows/build.yml
 
 .. |codecov| image:: https://codecov.io/gh/clinicedc/edc-model-form/branch/develop/graph/badge.svg
   :target: https://codecov.io/gh/clinicedc/edc-model-form
